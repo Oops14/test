@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 
 type Example2PropsType = {
-    value: any;
-};
-
-type valueType = {
-    objValue: string;
+    value: (param: string) => void;
 };
 
 export const Example2 = (props: Example2PropsType) => {
-    const [todo, setTodo] = useState("");
+    const [todo, setTodo] = useState<string>("");
 
     return (
         <div>
