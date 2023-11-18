@@ -3,6 +3,9 @@ import { Example1 } from "./components/Example1";
 import { Example2 } from "./components/Example2";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Example3 } from "./components/Example3";
+import React from "react";
+import { CircleButton } from "./components/CircleButton";
 
 type ValueType = {
     id: string;
@@ -28,8 +31,6 @@ function App() {
         setValue(value.filter((item: any) => item.id !== id));
     };
 
-
-
     let editTodo = (id: string) => {
         setValue(
             value.map((item) =>
@@ -47,6 +48,18 @@ function App() {
             )
         );
     };
+
+    const [isEnabled, setEnabled] = useState(false);
+    const [name, setName] = useState('');
+    React.useEffect(() => console.log("data", isEnabled), [isEnabled]);
+    React.useEffect(() => console.log("data", name), [name]);
+
+
+    let setControl = (title: any) => {
+        // console.log(title);
+        title === "On" ? setEnabled(true) : setEnabled(false);
+        setName(title);
+    }
 
     return (
         <div className="App">
@@ -110,6 +123,11 @@ function App() {
                 })}
             </ul>
             <hr />
+            <hr />
+
+            <Example3 name={`${name === "On" ? "active" : "disabled"}`} activeAttr={isEnabled} title="On"  isEnabled={setControl} />
+            <Example3 name={`${name === "Off" ? "active" : "disabled"}`} activeAttr={isEnabled} title="Off" isEnabled={setControl} />
+            <CircleButton activeAttr={isEnabled} />
         </div>
     );
 }
